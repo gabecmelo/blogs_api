@@ -44,8 +44,8 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
   <summary><strong>🗓 Data de Entrega</strong></summary>
 
   * Projeto individual.
-  * Serão `X` dias de projeto.
-  * Data de entrega para avaliação regular do projeto: `DD/MM/YYYY - 14:00h`.
+  * Serão `4` dias de projeto.
+  * Data de entrega para avaliação regular do projeto: `11/01/2024 14:00`.
 
 </details>
 
@@ -110,9 +110,9 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
   <summary><strong>‼️ Antes de começar a desenvolver</strong></summary>
 
 1. Clone o repositório
-  * `git clone git@github.com:tryber/sd-0x-project-blogs-api.git`.
+  * `git clone git@github.com:tryber/sd-033-a-project-blogs-api.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-0x-project-blogs-api`
+    * `cd sd-033-a-project-blogs-api`
 
 2. Instale as dependências [**Caso existam**]
   * `npm install`
@@ -124,7 +124,7 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
     * Exemplo: `git checkout master`
   * Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
     * Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    * Exemplo: `git checkout -b joaozinho-sd-0x-project-blogs-api`
+    * Exemplo: `git checkout -b joaozinho-sd-033-a-project-blogs-api`
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   * Verifique que as mudanças ainda não estão no _stage_
@@ -139,16 +139,16 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
         * `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
-  * Usando o exemplo anterior: `git push -u origin joaozinho-sd-0x-project-blogs-api`
+  * Usando o exemplo anterior: `git push -u origin joaozinho-sd-033-a-project-blogs-api`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-0x-project-blogs-api/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-033-a-project-blogs-api/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-0x-project-blogs-api/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-033-a-project-blogs-api/pulls) e confira que o seu _Pull Request_ está criado
 
 <br />
 </details>
@@ -255,7 +255,7 @@ Ao iniciar este projeto você concorda com as diretrizes do Código de Conduta e
 
   Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json` nos seguintes caminhos:
 
-  - `sd-0x-project-blogs-api/package.json`
+  - `sd-033-a-project-blogs-api/package.json`
 
   Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
 
@@ -518,7 +518,7 @@ JWT_SECRET=suaSenhaSecreta
   Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário. 
   **Leva menos de 3 minutos!**
 
-  [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/ZTeR4IbH)
+  [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/ZTeR4IbH#cohort_hidden=CH33-A&template=betrybe/sd-0x-project-blogs-api)
 
   :warning: **O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?**
 
