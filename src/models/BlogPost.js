@@ -49,10 +49,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'user_id',
     });
-    BlogPost.hasMany(models.PostCategory, {
-      foreignKey: 'id',
-      as: 'posts_categories',
-    });
   };
 
   return BlogPost;
