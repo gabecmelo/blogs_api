@@ -1,11 +1,16 @@
 const httpStatusHelper = require('./utils/httpStatusHelper');
+const { validateUserLogin } = require('./validations/validationInputValues');
 
-const login = ({ email, password }) => {
-  const token = `${email} ${password}`;
+const login = (loginData) => {
+  const { email, password } = loginData;
 
-  // Verificar token
+  const error = validateUserLogin(loginData)
 
-  return { status: httpStatusHelper.SUCCESSFUL, data: token };
+  if (error) {
+    return {status: error.data, data: error.data}
+  }
+
+  return { status: httpStatusHelper.SUCCESSFUL, data: {email, password} };
 };
 
 module.exports = {

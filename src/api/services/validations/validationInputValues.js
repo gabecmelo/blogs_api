@@ -21,7 +21,17 @@ const validateRegisterUserData = (userData, user) => {
   }
 };
 
+const validateUserLogin = ({ email, password }) => {
+  if (!email || !password) {
+    return {
+      status: httpStatusHelper.BAD_REQUEST,
+      data: { message: 'Some required fields are missing' },
+    };
+  }
+};
+
 module.exports = {
   validateNewUser,
   validateRegisterUserData,
+  validateUserLogin,
 };
