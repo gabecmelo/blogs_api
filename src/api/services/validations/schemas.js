@@ -7,6 +7,11 @@ const registerUserSchema = Joi.object({
   image: Joi.optional(),
 });
 
+const categoryInputSchema = Joi.object({
+  name: Joi.string().required(),
+});
+
 module.exports = {
   registerUserSchema,
+  categoryInputSchema,
 };

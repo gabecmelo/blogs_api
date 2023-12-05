@@ -1,5 +1,5 @@
 const httpStatusHelper = require('../utils/httpStatusHelper');
-const { registerUserSchema } = require('./schemas');
+const { registerUserSchema, categoryInputSchema } = require('./schemas');
 
 const validateNewUser = (userData) => {
   const { error } = registerUserSchema.validate(userData);
@@ -30,8 +30,29 @@ const validateUserLogin = ({ email, password }) => {
   }
 };
 
+const validateCategoryInput = (categoryData, existentCategory) => {
+  const { error } = categoryInputSchema.validate(categoryData);
+  if (error) {
+    return {
+      status: httpStatusHelper.BAD_REQUEST,
+      data: { message: error.message },
+    };
+  }
+  // getByName e passar o data como esse parâmetro para que funcione, da problema no requisito
+  if (existentCategory) {
+    return {
+      status: httpStatusHelper.CONFLICT,
+      data: {
+        message: 'Category already registered',
+        existentCategory,
+      },
+    };
+  }
+};
+
 module.exports = {
   validateNewUser,
   validateRegisterUserData,
   validateUserLogin,
+  validateCategoryInput,
 };
