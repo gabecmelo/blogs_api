@@ -3,18 +3,18 @@ const httpStatusHelper = require('./utils/httpStatusHelper');
 const {
   validateRegisterUserData,
 } = require('./validations/validationInputValues');
-const createToken = require('../../auth/createToken');
+const createToken = require('../auth/createToken');
 
 const sequelize = require('./utils/sequelize');
 
-const getUserByEmail = async (email) => {
+const getByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
   return { status: httpStatusHelper.SUCCESSFUL, data: user };
 };
 
 const register = async (newUserData) => {
   const { displayName, email, password, image } = newUserData;
-  const user = await getUserByEmail(email);
+  const user = await getByEmail(email);
   const error = await validateRegisterUserData(newUserData, user);
 
   if (error) {
@@ -32,7 +32,21 @@ const register = async (newUserData) => {
   return { status: httpStatusHelper.CREATED, data: transactionResult };
 };
 
+const getAll = async () => {
+  const users = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
+
+  if (!users) {
+    return {
+      status: httpStatusHelper.SUCCESSFUL,
+      data: { message: 'Não existem usuários cadastrados' },
+    };
+  }
+
+  return { status: httpStatusHelper.SUCCESSFUL, data: users };
+};
+
 module.exports = {
   register,
-  getUserByEmail,
+  getByEmail,
+  getAll,
 };

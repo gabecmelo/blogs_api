@@ -1,9 +1,9 @@
 const httpStatusHelper = require('./utils/httpStatusHelper');
 const { validateUserLogin } = require('./validations/validationInputValues');
 const { User } = require('../../models');
-const createToken = require('../../auth/createToken');
+const createToken = require('../auth/createToken');
 
-const getByLogin = async ({ email, password }) => {
+const getByLoginData = async ({ email, password }) => {
   const user = await User.findOne({ where: { email, password } });
 
   return user;
@@ -14,7 +14,7 @@ const login = async (loginData) => {
   if (error) {
     return { status: error.status, data: error.data };
   }
-  const user = await getByLogin(loginData);
+  const user = await getByLoginData(loginData);
 
   if (!user) {
     return {
@@ -30,5 +30,5 @@ const login = async (loginData) => {
 
 module.exports = {
   login,
-  getByLogin,
+  getByLoginData,
 };
