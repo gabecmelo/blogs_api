@@ -3,9 +3,9 @@ const httpStatusHelper = require('./utils/httpStatusHelper');
 const login = ({ email, password }) => {
   const token = `${email} ${password}`;
 
-  // Criar token
+  // Verificar token
 
-  return { status: httpStatusHelper.SUCCESFULL, data: token };
+  return { status: httpStatusHelper.SUCCESSFUL, data: token };
 };
 
 module.exports = {

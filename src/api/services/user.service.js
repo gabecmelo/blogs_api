@@ -1,15 +1,12 @@
-const jwt = require('jsonwebtoken');
 const Sequelize = require('sequelize');
 const { User } = require('../../models');
 const httpStatusHelper = require('./utils/httpStatusHelper');
 const config = require('../../config/config');
-const { validateUserData } = require('./validations/validationInputValues');
+const { validateRegisterUserData } = require('./validations/validationInputValues');
+const createToken = require('../../auth/createToken');
 
 const env = process.env.NODE_ENV;
 const sequelize = new Sequelize(config[env]);
-
-const secret = process.env.JWT_SECRET;
-const jwtConfig = { expiresIn: '7d', algorithm: 'HS256' };
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
@@ -19,7 +16,8 @@ const getUserByEmail = async (email) => {
 const register = async (newUserData) => {
   const { displayName, email, password, image } = newUserData;
   const user = await getUserByEmail(email);
-  const error = await validateUserData(newUserData, user);
+  const error = await validateRegisterUserData(newUserData, user);
+
   if (error) {
     return { status: error.status, data: error.data };
   }
@@ -29,7 +27,7 @@ const register = async (newUserData) => {
       { displayName, email, password, image },
       { transaction: t },
     );
-    const token = jwt.sign({ email, password }, secret, jwtConfig);
+    const token = createToken({email, password})
     return { token };
   });
   return { status: httpStatusHelper.CREATED, data: transactionResult };

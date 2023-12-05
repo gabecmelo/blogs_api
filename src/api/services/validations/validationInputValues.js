@@ -8,7 +8,7 @@ const validateNewUser = (userData) => {
   }
 };
 
-const validateUserData = (userData, user) => {
+const validateRegisterUserData = (userData, user) => {
   const error = validateNewUser(userData);
   if (error) {
     return { status: error.status, data: { message: error.message } };
@@ -23,5 +23,5 @@ const validateUserData = (userData, user) => {
 
 module.exports = {
   validateNewUser,
-  validateUserData,
+  validateRegisterUserData,
 };
