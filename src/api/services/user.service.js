@@ -1,12 +1,9 @@
-const Sequelize = require('sequelize');
 const { User } = require('../../models');
 const httpStatusHelper = require('./utils/httpStatusHelper');
-const config = require('../../config/config');
 const { validateRegisterUserData } = require('./validations/validationInputValues');
 const createToken = require('../../auth/createToken');
 
-const env = process.env.NODE_ENV;
-const sequelize = new Sequelize(config[env]);
+const sequelize = require('./utils/sequelize')
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
