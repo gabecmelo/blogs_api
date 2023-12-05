@@ -8,7 +8,7 @@ const register = async (req, res) => {
     res.status(mapStatusHttp(status)).json(data);
   } catch (e) {
     console.log(e);
-    res.status(mapStatusHttp(500)).json({ message: e });
+    res.status(500).json({ message: e });
   }
 };
 
