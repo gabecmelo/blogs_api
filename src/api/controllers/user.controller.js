@@ -7,7 +7,6 @@ const register = async (req, res) => {
     const { status, data } = await UserService.register(newUser);
     res.status(mapStatusHttp(status)).json(data);
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: e });
   }
 };
