@@ -20,10 +20,7 @@ const register = async (newUserData) => {
     return { status: error.status, data: error.data };
   }
   const transactionResult = await sequelize.transaction(async (t) => {
-    await User.create(
-      { displayName, email, password, image },
-      { transaction: t },
-    );
+    await User.create({ displayName, email, password, image }, { transaction: t });
     const token = createToken({ email, password });
     return { token };
   });
@@ -35,17 +32,19 @@ const getAll = async () => {
     attributes: ['id', 'displayName', 'email', 'image'],
   });
   if (!users) {
-    return { 
+    return {
       status: httpStatusHelper.SUCCESSFUL,
-      data: { message: 'Não existem usuários cadastrados' }, 
+      data: { message: 'Não existem usuários cadastrados' },
     };
   }
-
   return { status: httpStatusHelper.SUCCESSFUL, data: users };
 };
 
 const getById = async (id) => {
-  const user = await User.findOne({ where: id });
+  const user = await User.findOne({
+    where: { id },
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
   if (!user) {
     return { status: httpStatusHelper.NOT_FOUND, data: { message: 'User does not exist' } };
   }
