@@ -3,6 +3,7 @@ const httpStatusMap = {
   BAD_REQUEST: 400,
   CREATED: 201,
   CONFLICT: 409,
+  NOT_FOUND: 404,
 };
 
 const mapStatusHttp = (status) => httpStatusMap[status] || 500;

@@ -16,11 +16,9 @@ const register = async (newUserData) => {
   const { displayName, email, password, image } = newUserData;
   const user = await getByEmail(email);
   const error = await validateRegisterUserData(newUserData, user);
-
   if (error) {
     return { status: error.status, data: error.data };
   }
-
   const transactionResult = await sequelize.transaction(async (t) => {
     await User.create(
       { displayName, email, password, image },
@@ -33,20 +31,30 @@ const register = async (newUserData) => {
 };
 
 const getAll = async () => {
-  const users = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
-
+  const users = await User.findAll({
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
   if (!users) {
-    return {
+    return { 
       status: httpStatusHelper.SUCCESSFUL,
-      data: { message: 'Não existem usuários cadastrados' },
+      data: { message: 'Não existem usuários cadastrados' }, 
     };
   }
 
   return { status: httpStatusHelper.SUCCESSFUL, data: users };
 };
 
+const getById = async (id) => {
+  const user = await User.findOne({ where: id });
+  if (!user) {
+    return { status: httpStatusHelper.NOT_FOUND, data: { message: 'User does not exist' } };
+  }
+  return { status: httpStatusHelper.SUCCESSFUL, data: user };
+};
+
 module.exports = {
   register,
   getByEmail,
   getAll,
+  getById,
 };
