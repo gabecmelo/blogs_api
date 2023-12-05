@@ -11,7 +11,7 @@ const getByLogin = async ({ email, password }) => {
 
 const login = async (loginData) => {
   const error = validateUserLogin(loginData);
-    if (error) {
+  if (error) {
     return { status: error.status, data: error.data };
   }
   const user = await getByLogin(loginData);

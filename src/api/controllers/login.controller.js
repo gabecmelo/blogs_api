@@ -7,7 +7,7 @@ const login = async (req, res) => {
     const { status, data } = await LoginService.login(loginData);
     return res.status(mapStatusHttp(status)).json(data);
   } catch (e) {
-    res.status(500).json({message: e})
+    res.status(500).json({ message: e });
   }
 };
 

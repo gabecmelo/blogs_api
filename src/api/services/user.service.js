@@ -1,9 +1,11 @@
 const { User } = require('../../models');
 const httpStatusHelper = require('./utils/httpStatusHelper');
-const { validateRegisterUserData } = require('./validations/validationInputValues');
+const {
+  validateRegisterUserData,
+} = require('./validations/validationInputValues');
 const createToken = require('../../auth/createToken');
 
-const sequelize = require('./utils/sequelize')
+const sequelize = require('./utils/sequelize');
 
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
@@ -24,7 +26,7 @@ const register = async (newUserData) => {
       { displayName, email, password, image },
       { transaction: t },
     );
-    const token = createToken({email, password})
+    const token = createToken({ email, password });
     return { token };
   });
   return { status: httpStatusHelper.CREATED, data: transactionResult };
