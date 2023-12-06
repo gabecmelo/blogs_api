@@ -26,7 +26,21 @@ const insert = async (categoryData) => {
   return { status: httpStatusHelper.CREATED, data: transactionResult };
 };
 
+const getAll = async () => {
+  const categories = await Category.findAll();
+
+  if (!categories) {
+    return {
+      status: httpStatusHelper.SUCCESSFUL,
+      data: { message: 'There are no registered categories' },
+    };
+  }
+
+  return { status: httpStatusHelper.SUCCESSFUL, data: categories };
+};
+
 module.exports = {
   insert,
   getByName,
+  getAll,
 };

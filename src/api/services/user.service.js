@@ -34,7 +34,7 @@ const getAll = async () => {
   if (!users) {
     return {
       status: httpStatusHelper.SUCCESSFUL,
-      data: { message: 'Não existem usuários cadastrados' },
+      data: { message: 'There are no registered users' },
     };
   }
   return { status: httpStatusHelper.SUCCESSFUL, data: users };
