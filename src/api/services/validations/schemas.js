@@ -11,7 +11,20 @@ const categoryInputSchema = Joi.object({
   name: Joi.string().required(),
 });
 
+const loginSchema = Joi.object({
+  email: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+const newPostSchema = Joi.object({
+  title: Joi.string().min(1).required(),
+  content: Joi.string().min(1).required(),
+  categoryIds: Joi.array().items(Joi.number().required()).required(),
+});
+
 module.exports = {
   registerUserSchema,
   categoryInputSchema,
+  loginSchema,
+  newPostSchema,
 };

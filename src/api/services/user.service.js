@@ -1,8 +1,8 @@
 const { User } = require('../../models');
 const httpStatusHelper = require('./utils/httpStatusHelper');
 const {
-  validateRegisterUserData,
-} = require('./validations/validationInputValues');
+  userValidations,
+} = require('./validations');
 const createToken = require('../auth/createToken');
 
 const sequelize = require('./utils/sequelize');
@@ -15,7 +15,7 @@ const getByEmail = async (email) => {
 const register = async (newUserData) => {
   const { displayName, email, password, image } = newUserData;
   const user = await getByEmail(email);
-  const error = await validateRegisterUserData(newUserData, user);
+  const error = await userValidations.validateRegisterUserData(newUserData, user);
   if (error) {
     return { status: error.status, data: error.data };
   }
