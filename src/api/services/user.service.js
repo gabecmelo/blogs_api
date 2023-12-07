@@ -4,7 +4,6 @@ const {
   userValidations,
 } = require('./validations');
 const createToken = require('../auth/createToken');
-
 const sequelize = require('./utils/sequelize');
 
 const getByEmail = async (email) => {
@@ -28,22 +27,16 @@ const register = async (newUserData) => {
 };
 
 const getAll = async () => {
-  const users = await User.findAll({
-    attributes: ['id', 'displayName', 'email', 'image'],
-  });
+  const users = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
   if (!users) {
-    return {
-      status: httpHelper.SUCCESSFUL,
-      data: { message: 'There are no registered users' },
-    };
+    return { status: httpHelper.SUCCESSFUL, data: { message: 'There are no registered users' } };
   }
   return { status: httpHelper.SUCCESSFUL, data: users };
 };
 
 const getById = async (id) => {
   const user = await User.findOne({
-    where: { id },
-    attributes: ['id', 'displayName', 'email', 'image'],
+    where: { id }, attributes: ['id', 'displayName', 'email', 'image'], 
   });
   if (!user) {
     return { status: httpHelper.NOT_FOUND, data: { message: 'User does not exist' } };
@@ -51,9 +44,16 @@ const getById = async (id) => {
   return { status: httpHelper.SUCCESSFUL, data: user };
 };
 
+const exclude = async (userId) => {
+  const { data } = await getById(userId);
+  await data.destroy();
+  return { status: httpHelper.NO_CONTENT };
+};
+
 module.exports = {
   register,
   getByEmail,
   getAll,
   getById,
+  exclude,
 };

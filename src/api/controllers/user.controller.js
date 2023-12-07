@@ -18,9 +18,13 @@ const getAll = async (_req, res) => {
 
 const getById = async (req, res) => {
   const { id } = req.params;
-
   const { status, data } = await UserService.getById(id);
+  return res.status(mapStatusHttp(status)).json(data);
+};
 
+const exclude = async (req, res) => {
+  const userId = req.user.id;
+  const { status, data } = await UserService.exclude(userId);
   return res.status(mapStatusHttp(status)).json(data);
 };
 
@@ -28,4 +32,5 @@ module.exports = {
   register,
   getAll,
   getById,
+  exclude,
 };

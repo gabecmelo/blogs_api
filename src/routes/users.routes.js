@@ -8,4 +8,6 @@ usersRoute.get('/', validateToken, UserController.getAll);
 
 usersRoute.get('/:id', validateToken, UserController.getById);
 
+usersRoute.delete('/me', validateToken, UserController.exclude);
+
 module.exports = usersRoute;

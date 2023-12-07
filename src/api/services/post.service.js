@@ -1,4 +1,4 @@
-const httpHelper = require('./utils/httpStatusHelper');
+const httpHelper = require('./utils/httpHelper');
 const { postValidations } = require('./validations');
 const CategoryService = require('./category.service');
 const PostCategoryService = require('./post.categories.service');
