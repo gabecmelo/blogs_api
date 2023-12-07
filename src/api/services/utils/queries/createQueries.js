@@ -1,4 +1,4 @@
-const { BlogPost } = require('../../../models');
+const { BlogPost } = require('../../../../models');
 
 const createBlogPost = async (title, content, userId, transaction) => {
   const now = new Date();

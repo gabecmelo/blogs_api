@@ -6,7 +6,7 @@ postsRoutes.post('/', validateToken, PostController.insert);
 
 postsRoutes.get('/', validateToken, PostController.getAll);
 
-// postsRoutes.get('/:id', validateToken, PostController.getById);
+postsRoutes.get('/:id', validateToken, PostController.getById);
 
 // postsRoutes.put('/:id', validateToken, PostController.update);
 

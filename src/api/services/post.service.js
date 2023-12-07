@@ -2,9 +2,10 @@ const httpStatusHelper = require('./utils/httpStatusHelper');
 const { postValidations } = require('./validations');
 const CategoryService = require('./category.service');
 const PostCategoryService = require('./post.categories.service');
-const { BlogPost, User, Category } = require('../../models');
+const { BlogPost } = require('../../models');
 const sequelize = require('./utils/sequelize');
-const { createBlogPost } = require('./utils/createQuerys');
+const { createBlogPost } = require('./utils/queries/createQueries');
+const { BlogOptionsQuery } = require('./utils/queriesOptions');
 
 const insert = async ({ title, content, categoryIds }, userId) => {
   const error = postValidations.validateNewPostData({ title, content, categoryIds });
@@ -28,21 +29,23 @@ const insert = async ({ title, content, categoryIds }, userId) => {
 };
 
 const getAll = async () => {
-  const posts = await BlogPost.findAll({
-    include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      {
-        model: Category,
-        as: 'categories',
-        attributes: ['id', 'name'],
-        through: { attributes: [] },
-      },
-    ],
-  });
+  const posts = await BlogPost.findAll(BlogOptionsQuery);
   return { status: httpStatusHelper.SUCCESSFUL, data: posts };
+};
+
+const getById = async (id) => {
+  const post = await BlogPost.findByPk(id, BlogOptionsQuery);
+  if (!post) {
+    return {
+      status: httpStatusHelper.NOT_FOUND, 
+      data: { message: 'Post does not exist' },
+    };
+  }
+  return { status: httpStatusHelper.SUCCESSFUL, data: post };
 };
 
 module.exports = {
   insert,
   getAll,
+  getById,
 };
