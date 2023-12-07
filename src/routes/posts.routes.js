@@ -4,7 +4,7 @@ const { PostController } = require('../api/controllers');
 
 postsRoutes.post('/', validateToken, PostController.insert);
 
-// postsRoutes.get('/', validateToken, PostController.getAll);
+postsRoutes.get('/', validateToken, PostController.getAll);
 
 // postsRoutes.get('/:id', validateToken, PostController.getById);
 
