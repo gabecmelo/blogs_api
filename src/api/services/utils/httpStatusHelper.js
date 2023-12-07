@@ -4,6 +4,7 @@ const httpStatusHelper = {
   CREATED: 'CREATED',
   CONFLICT: 'CONFLICT',
   NOT_FOUND: 'NOT_FOUND',
+  UNAUTHORIZED: 'UNAUTHORIZED',
 };
 
 module.exports = httpStatusHelper;

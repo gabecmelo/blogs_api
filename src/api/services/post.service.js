@@ -2,10 +2,10 @@ const httpStatusHelper = require('./utils/httpStatusHelper');
 const { postValidations } = require('./validations');
 const CategoryService = require('./category.service');
 const PostCategoryService = require('./post.categories.service');
-const { BlogPost } = require('../../models');
 const sequelize = require('./utils/sequelize');
 const { createBlogPost } = require('./utils/queries/createQueries');
-const { BlogOptionsQuery } = require('./utils/queriesOptions');
+const { validateUpdateData } = require('./validations/post.validations');
+const { getById } = require('./postFinders.service');
 
 const insert = async ({ title, content, categoryIds }, userId) => {
   const error = postValidations.validateNewPostData({ title, content, categoryIds });
@@ -28,24 +28,23 @@ const insert = async ({ title, content, categoryIds }, userId) => {
   return { status: httpStatusHelper.CREATED, data: transactionResult };
 };
 
-const getAll = async () => {
-  const posts = await BlogPost.findAll(BlogOptionsQuery);
-  return { status: httpStatusHelper.SUCCESSFUL, data: posts };
-};
-
-const getById = async (id) => {
-  const post = await BlogPost.findByPk(id, BlogOptionsQuery);
-  if (!post) {
-    return {
-      status: httpStatusHelper.NOT_FOUND, 
-      data: { message: 'Post does not exist' },
-    };
+const update = async (updatedPostData, postId, userId) => {
+  const error = validateUpdateData(updatedPostData);
+  if (error) return { status: error.status, data: error.data };
+  const { status, data } = await getById(postId);
+  if (status === httpStatusHelper.NOT_FOUND) return { status, data };
+  const { id } = data.user;
+  if (id !== userId) {
+    return { status: httpStatusHelper.UNAUTHORIZED, data: { message: 'Unauthorized user' } };
   }
-  return { status: httpStatusHelper.SUCCESSFUL, data: post };
+  const { title, content } = updatedPostData;
+  const updated = new Date();
+  await data.update({ title, content, updated });
+  await data.save();
+  return { status: httpStatusHelper.SUCCESSFUL, data };
 };
 
 module.exports = {
   insert,
-  getAll,
-  getById,
+  update,
 };
