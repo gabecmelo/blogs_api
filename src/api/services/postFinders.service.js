@@ -1,9 +1,14 @@
 const httpHelper = require('./utils/httpHelper');
-const { BlogOptionsQuery } = require('./utils/queriesOptions');
+const { BlogOptionsQuery, BlogOptionsQueryWithTerms } = require('./utils/queriesOptions');
 const { BlogPost } = require('../../models');
 
-const getAll = async () => {
-  const posts = await BlogPost.findAll(BlogOptionsQuery);
+const getAll = async (query) => {
+  let posts = [];
+  if (query) {
+    posts = await BlogPost.findAll(BlogOptionsQueryWithTerms(query));
+    return { status: httpHelper.SUCCESSFUL, data: posts };
+  }
+  posts = await BlogPost.findAll(BlogOptionsQuery);
   return { status: httpHelper.SUCCESSFUL, data: posts };
 };
 

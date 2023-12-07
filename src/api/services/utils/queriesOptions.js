@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { User, Category } = require('../../../models');
 
 const BlogOptionsQuery = {
@@ -12,6 +13,21 @@ const BlogOptionsQuery = {
   ],
 };
 
+const BlogOptionsQueryWithTerms = (query) => {
+  const formattedQuery = `%${query}%`;
+  const { include } = BlogOptionsQuery;
+  return {
+    where: {
+      [Op.or]: [
+        { title: { [Op.like]: formattedQuery } },
+        { content: { [Op.like]: formattedQuery } },
+      ],
+    },
+    include,
+  };
+};
+
 module.exports = {
   BlogOptionsQuery,
+  BlogOptionsQueryWithTerms,
 };
