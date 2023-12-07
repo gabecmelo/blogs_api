@@ -1,11 +1,11 @@
 const { Category } = require('../../models');
-const httpStatusHelper = require('./utils/httpStatusHelper');
+const httpHelper = require('./utils/httpHelper');
 const sequelize = require('./utils/sequelize');
 const { categoryValidations } = require('./validations');
 
 const getByName = async (name) => {
   const category = await Category.findOne({ where: { name } });
-  return { status: httpStatusHelper.SUCCESSFUL, data: category };
+  return { status: httpHelper.SUCCESSFUL, data: category };
 };
 
 const insert = async (categoryData) => {
@@ -18,18 +18,18 @@ const insert = async (categoryData) => {
     const category = await Category.create({ name }, { transaction: t });
     return category;
   });
-  return { status: httpStatusHelper.CREATED, data: transactionResult };
+  return { status: httpHelper.CREATED, data: transactionResult };
 };
 
 const getAll = async () => {
   const categories = await Category.findAll();
   if (!categories) {
     return {
-      status: httpStatusHelper.SUCCESSFUL,
+      status: httpHelper.SUCCESSFUL,
       data: { message: 'There are no registered categories' },
     };
   }
-  return { status: httpStatusHelper.SUCCESSFUL, data: categories };
+  return { status: httpHelper.SUCCESSFUL, data: categories };
 };
 
 const getAllByIds = async (ids) => {
@@ -38,16 +38,16 @@ const getAllByIds = async (ids) => {
       const category = await Category.findByPk(id);
       if (!category || category === null) {
         return {
-          status: httpStatusHelper.BAD_REQUEST,
+          status: httpHelper.BAD_REQUEST,
           data: { message: 'one or more "categoryIds" not found' },
         };
       }
       return category;
     }),
   );
-  const error = categories.find((c) => c.status === httpStatusHelper.BAD_REQUEST);
+  const error = categories.find((c) => c.status === httpHelper.BAD_REQUEST);
   if (error) return error;
-  return { status: httpStatusHelper.SUCCESSFUL, data: categories };
+  return { status: httpHelper.SUCCESSFUL, data: categories };
 };
 
 module.exports = {

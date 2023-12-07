@@ -1,4 +1,4 @@
-const httpStatusHelper = require('./utils/httpStatusHelper');
+const httpHelper = require('./utils/httpHelper');
 const { userValidations } = require('./validations');
 const { User } = require('../../models');
 const createToken = require('../auth/createToken');
@@ -17,13 +17,13 @@ const login = async (loginData) => {
   const user = await getByLoginData(loginData);
   if (!user) {
     return {
-      status: httpStatusHelper.BAD_REQUEST,
+      status: httpHelper.BAD_REQUEST,
       data: { message: 'Invalid fields' },
     };
   }
 
   const token = createToken(loginData);
-  return { status: httpStatusHelper.SUCCESSFUL, data: { token } };
+  return { status: httpHelper.SUCCESSFUL, data: { token } };
 };
 
 module.exports = {

@@ -1,5 +1,5 @@
 const { User } = require('../../models');
-const httpStatusHelper = require('./utils/httpStatusHelper');
+const httpHelper = require('./utils/httpHelper');
 const {
   userValidations,
 } = require('./validations');
@@ -9,7 +9,7 @@ const sequelize = require('./utils/sequelize');
 
 const getByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
-  return { status: httpStatusHelper.SUCCESSFUL, data: user };
+  return { status: httpHelper.SUCCESSFUL, data: user };
 };
 
 const register = async (newUserData) => {
@@ -24,7 +24,7 @@ const register = async (newUserData) => {
     const token = createToken({ email, password });
     return { token };
   });
-  return { status: httpStatusHelper.CREATED, data: transactionResult };
+  return { status: httpHelper.CREATED, data: transactionResult };
 };
 
 const getAll = async () => {
@@ -33,11 +33,11 @@ const getAll = async () => {
   });
   if (!users) {
     return {
-      status: httpStatusHelper.SUCCESSFUL,
+      status: httpHelper.SUCCESSFUL,
       data: { message: 'There are no registered users' },
     };
   }
-  return { status: httpStatusHelper.SUCCESSFUL, data: users };
+  return { status: httpHelper.SUCCESSFUL, data: users };
 };
 
 const getById = async (id) => {
@@ -46,9 +46,9 @@ const getById = async (id) => {
     attributes: ['id', 'displayName', 'email', 'image'],
   });
   if (!user) {
-    return { status: httpStatusHelper.NOT_FOUND, data: { message: 'User does not exist' } };
+    return { status: httpHelper.NOT_FOUND, data: { message: 'User does not exist' } };
   }
-  return { status: httpStatusHelper.SUCCESSFUL, data: user };
+  return { status: httpHelper.SUCCESSFUL, data: user };
 };
 
 module.exports = {
