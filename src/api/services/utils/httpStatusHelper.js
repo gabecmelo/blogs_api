@@ -1,10 +1,11 @@
-const httpStatusHelper = {
+const httpHelper = {
   SUCCESSFUL: 'SUCCESSFUL',
   BAD_REQUEST: 'BAD_REQUEST',
   CREATED: 'CREATED',
   CONFLICT: 'CONFLICT',
   NOT_FOUND: 'NOT_FOUND',
   UNAUTHORIZED: 'UNAUTHORIZED',
+  NO_CONTENT: 'NO_CONTENT',
 };
 
-module.exports = httpStatusHelper;
+module.exports = httpHelper;

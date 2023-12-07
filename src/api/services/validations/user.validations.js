@@ -31,8 +31,22 @@ const validateUserLogin = (userLogin) => {
   }
 };
 
+const validateAuthorizedUser = (contentUserId, loggedUserId) => {
+  if (contentUserId !== loggedUserId) {
+    return {
+      authorizedUser: httpStatusHelper.UNAUTHORIZED,
+      authorizedMessage: { message: 'Unauthorized user' },
+    };
+  }
+  return {
+    authorizedUser: httpStatusHelper.SUCCESSFUL,
+    authorizedMessage: { message: 'Authorized user' },
+  };
+};
+
 module.exports = {
   validateUserLogin,
   validateNewUser,
   validateRegisterUserData,
+  validateAuthorizedUser,
 };

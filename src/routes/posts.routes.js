@@ -10,4 +10,6 @@ postsRoutes.get('/:id', validateToken, PostController.getById);
 
 postsRoutes.put('/:id', validateToken, PostController.update);
 
+postsRoutes.delete('/:id', validateToken, PostController.exclude);
+
 module.exports = postsRoutes;
