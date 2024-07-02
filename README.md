@@ -94,7 +94,7 @@ npm run cy:open       # Abre a interface gráfica do Cypress para testes
     ```
 
 ## Rotas da Aplicação
-A aplicação possui diversas rotas para interagir com produtos e suas respectivas vendas.
+A aplicação possui diversas rotas para interagir com posts.
 
 *Cadastro de Usuários:* **POST /user** <br>
 
@@ -120,7 +120,7 @@ A aplicação possui diversas rotas para interagir com produtos e suas respectiv
 
 *Busca de Posts por Termo:* **GET /post/search?q=termo** *<- Substitua **termo** pela busca desejada* <br>
 
-## ***Aproveite o Projeto Store Manager! 🚀***
+## ***Aproveite o Projeto Blogs API! 🚀***
 
 ## Feedbacks e Contribuições:
 
